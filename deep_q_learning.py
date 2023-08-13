@@ -467,9 +467,9 @@ class DDPG:
             return np.random.randint(0, self.action_space_shape)
         else:
             if isinstance(self.state_space_shape, tuple):
-                state = state.reshape((1,) + self.state_space_shape)
+                state = np.asarray(state).reshape((1,) + self.state_space_shape)
             else:
-                state = state.reshape(1, self.state_space_shape)
+                state = np.asarray(state).reshape(1, self.state_space_shape)
             return np.argmax(self.actor.predict(state)[0])
 
     def _get_continuous_action(self, state, epsilon=0):
